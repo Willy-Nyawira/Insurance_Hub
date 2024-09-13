@@ -1,0 +1,11 @@
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\bin\Debug\net8.0\InsuranceHub.Domain.deps.json
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\bin\Debug\net8.0\InsuranceHub.Domain.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\bin\Debug\net8.0\InsuranceHub.Domain.pdb
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\InsuranceHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\InsuranceHub.Domain.AssemblyInfoInputs.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\InsuranceHub.Domain.AssemblyInfo.cs
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\InsuranceHub.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\InsuranceHub.Domain.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\refint\InsuranceHub.Domain.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\InsuranceHub.Domain.pdb
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Domain\obj\Debug\net8.0\ref\InsuranceHub.Domain.dll

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\InsuranceHub.API.props" />
+</Project>
