@@ -144,3 +144,4 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.genruntimeconfig.cache
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\ref\InsuranceHub.API.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.sourcelink.json

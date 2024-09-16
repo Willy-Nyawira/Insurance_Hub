@@ -15,7 +15,15 @@ namespace InsuranceHub.Domain.Entities
         public decimal PremiumAmount { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Guid UserId { get; set; }  
+        public Guid UserId { get; set; }
+        public string CreatedBy { get; set; }
         public User User { get; set; }
+
+        // Generate policy number with a pattern
+        public void GeneratePolicyNumber()
+        {
+            // Example: "POL-20240916-0001"
+            PolicyNumber = $"POL-{DateTime.UtcNow:yyyyMMdd}-{new Random().Next(1000, 9999)}";
+        }
     }
 }

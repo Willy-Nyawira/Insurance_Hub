@@ -1,4 +1,5 @@
-﻿using InsuranceHub.Application.DTOS;
+﻿using System.Security.Claims;
+using InsuranceHub.Application.DTOS;
 using InsuranceHub.Application.RepositoryInterfaces;
 using InsuranceHub.Application.UseCases;
 using InsuranceHub.Domain.Entities;
@@ -30,14 +31,16 @@ namespace InsuranceHub.API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreatePolicy([FromBody] CreatePolicyDto createPolicyDto)
         {
-            var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("UserId");
+            var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name) ??
+                              _httpContextAccessor.HttpContext.User.FindFirst("unique_name");
+
+
             if (userIdClaim == null)
             {
                 return Unauthorized("User not logged in");
             }
 
-            var userId = Guid.Parse(userIdClaim.Value);
-
+            var userId = userIdClaim.Value;
             var policyId = await _registerPolicyUseCase.Execute(createPolicyDto, userId);
             return Ok(new { PolicyId = policyId, Message = "Policy created successfully." });
         }

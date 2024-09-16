@@ -28,8 +28,8 @@ namespace InsuranceHub.Application.UseCases
                 PremiumAmount = policy.PremiumAmount,
                 StartDate = policy.StartDate,
                 EndDate = policy.EndDate,
-               
-                UserId = policy.UserId
+                CustomerId = customerId,
+                UserName = policy.CreatedBy
             }).ToList();
         }
 

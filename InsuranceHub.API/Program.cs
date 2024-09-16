@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using InsuranceHub.Application.UseCases;
+using Microsoft.OpenApi.Models;
 
 namespace InsuranceHub.API
 {
@@ -66,10 +67,45 @@ namespace InsuranceHub.API
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<GetCustomerByIdUseCase>();
             builder.Services.AddScoped<GetCustomerByUsernameUseCase>();
+            builder.Services.AddHttpContextAccessor();
+           
+
+
 
             // Add Swagger for API documentation
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            // Add Swagger generation with Bearer Token Authorization
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "InsuranceHub.API", Version = "v1" });
+
+                // Define the BearerAuth scheme
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\n\nExample: 'Bearer 12345abcdef'",
+                });
+
+                // Make Swagger use the BearerAuth scheme
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+              new OpenApiSecurityScheme
+              {
+                  Reference = new OpenApiReference
+                  {
+                      Type = ReferenceType.SecurityScheme,
+                      Id = "Bearer"
+                  }
+              },
+              new string[] {}
+        }
+    });
+            });
 
             var app = builder.Build();
 
@@ -77,7 +113,10 @@ namespace InsuranceHub.API
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "InsuranceHub.API v1");
+                });
             }
 
             app.UseHttpsRedirection();

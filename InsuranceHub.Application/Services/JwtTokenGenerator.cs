@@ -50,8 +50,8 @@ namespace InsuranceHub.Application.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
-                {
-            new Claim(ClaimTypes.Name, user.Username),
+        {
+            new Claim(ClaimTypes.Name, user.Username),  // Use user.Username here
             new Claim(ClaimTypes.Email, user.Email.Address),
             new Claim(ClaimTypes.Role, user.Roles.ToString())
         }),

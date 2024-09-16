@@ -15,6 +15,6 @@ namespace InsuranceHub.Application.DTOS
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Guid CustomerId { get; set; }  
-        public Guid UserId { get; set; }
+        public string UserName { get; set; }
     }
 }

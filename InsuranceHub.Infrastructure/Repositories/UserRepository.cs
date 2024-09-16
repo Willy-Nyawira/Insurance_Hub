@@ -51,6 +51,11 @@ namespace InsuranceHub.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<User> FindByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == username); // Adjust according to your user model
+        }
     }
 }
 

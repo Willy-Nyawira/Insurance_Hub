@@ -13,3 +13,4 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.App
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\refint\InsuranceHub.Application.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\ref\InsuranceHub.Application.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.sourcelink.json

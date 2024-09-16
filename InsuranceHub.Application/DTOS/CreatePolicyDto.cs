@@ -9,8 +9,8 @@ namespace InsuranceHub.Application.DTOS
 {
     public class CreatePolicyDto
     {
-        [Required]
-        public string PolicyNumber { get; set; }
+       
+        
 
         [Required]
         public string PolicyType { get; set; }
@@ -24,5 +24,6 @@ namespace InsuranceHub.Application.DTOS
 
         [Required]
         public DateTime EndDate { get; set; }
+        
     }
 }
