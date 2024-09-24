@@ -7,6 +7,7 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.API.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Humanizer.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\MediatR.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\MediatR.Contracts.dll
@@ -130,6 +131,7 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.csproj.CoreCompileInputs.cache
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.sourcelink.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\staticwebassets\msbuild.InsuranceHub.API.Microsoft.AspNetCore.StaticWebAssets.props
@@ -144,4 +146,3 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.genruntimeconfig.cache
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\ref\InsuranceHub.API.dll
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.sourcelink.json

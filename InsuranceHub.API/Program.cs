@@ -24,8 +24,10 @@ namespace InsuranceHub.API
             builder.Services.AddScoped<RegisterCustomerUseCase>();
             builder.Services.AddScoped<GetPolicyByIdUseCase>();
             builder.Services.AddScoped<RegisterPolicyUseCase>();
+            builder.Services.AddScoped<CustomerLoginUseCase>();
 
-            
+
+
             builder.Services.AddScoped<IPolicyRepository, PolicyRepository>();
         
 

@@ -12,12 +12,14 @@ namespace InsuranceHub.API.Controllers
         private readonly RegisterCustomerUseCase _registerCustomerUseCase;
         private readonly GetCustomerByIdUseCase _getCustomerByIdUseCase;
         private readonly GetCustomerByUsernameUseCase _getCustomerByUsernameUseCase;
+        private readonly CustomerLoginUseCase _customerLoginUseCase;
 
-        public CustomersController(RegisterCustomerUseCase registerCustomerUseCase, GetCustomerByIdUseCase getCustomerByIdUseCase, GetCustomerByUsernameUseCase getCustomerByUsernameUseCase)
+        public CustomersController(RegisterCustomerUseCase registerCustomerUseCase, GetCustomerByIdUseCase getCustomerByIdUseCase, GetCustomerByUsernameUseCase getCustomerByUsernameUseCase,CustomerLoginUseCase customerLoginUseCase)
         {
             _registerCustomerUseCase = registerCustomerUseCase;
             _getCustomerByIdUseCase = getCustomerByIdUseCase;
             _getCustomerByUsernameUseCase = getCustomerByUsernameUseCase;
+            _customerLoginUseCase = customerLoginUseCase;
         }
 
         [HttpPost]
@@ -40,6 +42,19 @@ namespace InsuranceHub.API.Controllers
             {
                 // Handle the exception, maybe return a 404 Not Found or other appropriate status code
                 return NotFound(ex.Message);
+            }
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            try
+            {
+                var token = await _customerLoginUseCase.Execute(loginDto);
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(new { Message = ex.Message });
             }
         }
         [HttpGet("username/{username}")]

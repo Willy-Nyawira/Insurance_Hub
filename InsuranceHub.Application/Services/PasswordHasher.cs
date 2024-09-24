@@ -10,23 +10,32 @@ namespace InsuranceHub.Application.Services
 {
     public class PasswordHasher: IPasswordHasher
     {
-        // Hash the password using PBKDF2 algorithm
-        public string Hash(string password)
+
+       
+        // Generate a salt using RNGCryptoServiceProvider
+        public string GetSalt()
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
                 byte[] salt = new byte[16];
                 rng.GetBytes(salt);
-
-                var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
-                byte[] hash = pbkdf2.GetBytes(20);
-
-                byte[] hashBytes = new byte[36];
-                Array.Copy(salt, 0, hashBytes, 0, 16);
-                Array.Copy(hash, 0, hashBytes, 16, 20);
-
-                return Convert.ToBase64String(hashBytes);
+                return Convert.ToBase64String(salt);
             }
+        }
+
+        // Hash the password using PBKDF2 algorithm and a given salt
+        public string Hash(string password)
+        {
+            var salt = Convert.FromBase64String(GetSalt()); // Generate salt here
+
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            return Convert.ToBase64String(hashBytes);
         }
 
         // Verify the password by comparing the hash
@@ -50,16 +59,7 @@ namespace InsuranceHub.Application.Services
 
             return true;
         }
-
-        // Generate a random salt (if needed elsewhere)
-        public string GetSalt()
-        {
-            byte[] salt = new byte[16];
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(salt);
-            }
-            return Convert.ToBase64String(salt);
-        }
     }
+
 }
+

@@ -10,6 +10,7 @@ namespace InsuranceHub.Domain.Enums
     {
         Admin,
         User,
-        Supervisor
+        Supervisor,
+        Customer
     }
 }

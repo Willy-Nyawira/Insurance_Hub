@@ -8,9 +8,9 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.App
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.AssemblyInfoInputs.cache
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.AssemblyInfo.cs
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.csproj.CoreCompileInputs.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.sourcelink.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\Insuranc.3C3368A3.Up2Date
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\refint\InsuranceHub.Application.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\ref\InsuranceHub.Application.dll
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.Application\obj\Debug\net8.0\InsuranceHub.Application.sourcelink.json
