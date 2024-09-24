@@ -43,7 +43,8 @@ namespace InsuranceHub.Application.Handlers
                 Credentials = new UserCredentials
                 {
                     PasswordHash = hashedPassword,
-                    Salt = _passwordHasher.GetSalt()
+                    Salt=salt
+                   // Salt = _passwordHasher.GetSalt()
                 }
             };
 

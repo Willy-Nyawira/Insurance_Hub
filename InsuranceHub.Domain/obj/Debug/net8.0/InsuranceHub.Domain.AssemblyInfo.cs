@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InsuranceHub.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d300c9c4fbe4ba8662f1b94034d875189089dadc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fd7bbca32a79b05a56381411ff1aa24d614c03d")]
 [assembly: System.Reflection.AssemblyProductAttribute("InsuranceHub.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InsuranceHub.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

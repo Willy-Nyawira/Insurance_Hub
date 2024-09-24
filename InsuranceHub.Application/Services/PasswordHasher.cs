@@ -46,6 +46,7 @@ namespace InsuranceHub.Application.Services
             byte[] salt = new byte[16];
             Array.Copy(hashBytes, 0, salt, 0, 16);
 
+            // Hash the incoming password using the same salt
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
             byte[] hash = pbkdf2.GetBytes(20);
 

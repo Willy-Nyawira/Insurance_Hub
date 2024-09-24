@@ -9,7 +9,7 @@ namespace InsuranceHub.Domain.Entities
 {
     public class Customer
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
 
         private string _firstName;
         public string FirstName
@@ -121,8 +121,26 @@ namespace InsuranceHub.Domain.Entities
         {
             Policies = new List<Policy>();
         }
+        public Customer(Guid id, string firstName, string lastName, DateTime dob, char gender, string physicalAddress, string city, string region, string phoneNumber, Email emailAddress, string passwordHash)
+            : this() // Calls the parameterless constructor to initialize Policies
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Dob = dob;
+            Gender = gender;
+            PhysicalAddress = physicalAddress;
+            City = city;
+            Region = region;
+            PhoneNumber = phoneNumber;
+            EmailAddress = emailAddress;
+            PasswordHash = passwordHash;
 
-        private void SetUsername()
+            // Set the username once first and last names are initialized
+            SetUsername();
+        }
+
+            private void SetUsername()
         {
             if (!string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName))
             {

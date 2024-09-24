@@ -19,11 +19,14 @@ namespace InsuranceHub.Application.UseCases
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public CustomerLoginUseCase(ICustomerRepository customerRepository, IJwtTokenGenerator jwtTokenGenerator)
+        public CustomerLoginUseCase(ICustomerRepository customerRepository, IJwtTokenGenerator jwtTokenGenerator,
+            IPasswordHasher passwordHasher)
         {
             _customerRepository = customerRepository;
             _jwtTokenGenerator = jwtTokenGenerator;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<string> Execute(LoginDto loginDto)
@@ -34,7 +37,7 @@ namespace InsuranceHub.Application.UseCases
                 throw new ArgumentException("Customer not found.");
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, customer.PasswordHash))
+            if (!_passwordHasher.VerifyPassword(loginDto.Password, customer.PasswordHash))
             {
                 throw new ArgumentException("Invalid password.");
             }
