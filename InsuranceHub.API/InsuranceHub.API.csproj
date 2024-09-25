@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InsuranceHub.Application\InsuranceHub.Application.csproj" />
-    <ProjectReference Include="..\InsuranceHub.Domain\InsuranceHub.Domain.csproj" />
     <ProjectReference Include="..\InsuranceHub.Infrastructure\InsuranceHub.Infrastructure.csproj" />
   </ItemGroup>
 

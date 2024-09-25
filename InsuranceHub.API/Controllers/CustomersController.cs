@@ -5,7 +5,6 @@ using InsuranceHub.Application.RepositoryInterfaces;
 using InsuranceHub.Application.ServiceInterfaces;
 using InsuranceHub.Application.UseCases;
 using InsuranceHub.Domain.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceHub.API.Controllers
@@ -20,8 +19,10 @@ namespace InsuranceHub.API.Controllers
         private readonly CustomerLoginUseCase _customerLoginUseCase;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ICustomerRepository _customerRepository;
+        private readonly ITokenService _tokenService;
+        private readonly IEmailService _emailService;
 
-        public CustomersController( GetCustomerByIdUseCase getCustomerByIdUseCase,
+        public CustomersController( GetCustomerByIdUseCase getCustomerByIdUseCase, IEmailService emailservice,ITokenService tokenService,
             GetCustomerByUsernameUseCase getCustomerByUsernameUseCase,CustomerLoginUseCase customerLoginUseCase,
              ICustomerRepository customerRepository, IPasswordHasher passwordHasher)
         {
@@ -31,6 +32,8 @@ namespace InsuranceHub.API.Controllers
             _customerLoginUseCase = customerLoginUseCase;
             _customerRepository = customerRepository;
             _passwordHasher = passwordHasher;
+            _tokenService = tokenService;
+            _emailService = emailservice;
         }
 
         [HttpPost("Register Customer")]
@@ -99,6 +102,35 @@ namespace InsuranceHub.API.Controllers
             catch (Exception ex)
             {
                 return NotFound(new { Message = ex.Message });
+            }
+        }
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO command)
+        {
+            try
+            {
+                var useCase = new ForgotPasswordUseCase(_customerRepository, _tokenService, _emailService);
+                await useCase.Execute(command);
+                return Ok(new { Message = "Password reset token sent to your email." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand command)
+        {
+            try
+            {
+                var useCase = new ResetPasswordUseCase(_customerRepository, _tokenService, _passwordHasher);
+                await useCase.Execute(command);
+                return Ok(new { Message = "Password has been reset successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
             }
         }
     }

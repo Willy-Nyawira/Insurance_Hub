@@ -1,3 +1,10 @@
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.csproj.AssemblyReference.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.AssemblyInfoInputs.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.AssemblyInfo.cs
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.csproj.CoreCompileInputs.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.sourcelink.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\appsettings.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.API.exe
@@ -9,6 +16,7 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Jab.Attributes.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\MediatR.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\MediatR.Contracts.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -36,6 +44,7 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Raiqub.JabModules.MicrosoftExtensionsOptions.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -122,16 +131,8 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Domain.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Infrastructure.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Application.pdb
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Domain.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Infrastructure.pdb
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.csproj.AssemblyReference.cache
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.AssemblyInfoInputs.cache
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.AssemblyInfo.cs
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.csproj.CoreCompileInputs.cache
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.sourcelink.json
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Domain.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\staticwebassets\msbuild.InsuranceHub.API.Microsoft.AspNetCore.StaticWebAssets.props

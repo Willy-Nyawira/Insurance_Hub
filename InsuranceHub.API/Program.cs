@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using InsuranceHub.Application.UseCases;
 using Microsoft.OpenApi.Models;
+using InsuranceHub.Domain.Entities;
 
 namespace InsuranceHub.API
 {
@@ -24,6 +25,10 @@ namespace InsuranceHub.API
             builder.Services.AddScoped<GetPolicyByIdUseCase>();
             builder.Services.AddScoped<RegisterPolicyUseCase>();
             builder.Services.AddScoped<CustomerLoginUseCase>();
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
+
 
 
 

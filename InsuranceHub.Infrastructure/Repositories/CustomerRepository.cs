@@ -55,5 +55,9 @@ namespace InsuranceHub.Infrastructure.Repositories
             return await _context.Customers
                 .FirstOrDefaultAsync(c => c.Username == username);
         }
+        public async Task<Customer> GetByEmailAsync(string email)
+        {
+            return await _context.Customers.FirstOrDefaultAsync(c => c.EmailAddress.Address == email);
+        }
     }
 }

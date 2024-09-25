@@ -16,5 +16,6 @@ namespace InsuranceHub.Application.RepositoryInterfaces
         Task<IEnumerable<Customer>> GetAllAsync();
         Task UpdateAsync(Customer customer);
         Task DeleteAsync(Guid customerId);
+        Task<Customer> GetByEmailAsync(string email);
     }
 }

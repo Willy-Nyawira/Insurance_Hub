@@ -72,6 +72,15 @@
           }
         }
       },
+      "Jab.Attributes/0.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Jab.Attributes.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Jab.Attributes.dll": {}
+        }
+      },
       "MediatR/12.4.1": {
         "type": "package",
         "dependencies": {
@@ -973,6 +982,23 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
         }
       },
+      "Raiqub.JabModules.MicrosoftExtensionsOptions/1.0.16": {
+        "type": "package",
+        "dependencies": {
+          "Jab.Attributes": "0.10.1",
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Raiqub.JabModules.MicrosoftExtensionsOptions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Raiqub.JabModules.MicrosoftExtensionsOptions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
@@ -1570,6 +1596,7 @@
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.Extensions.Configuration": "8.0.0",
+          "Raiqub.JabModules.MicrosoftExtensionsOptions": "1.0.16",
           "System.IdentityModel.Tokens.Jwt": "8.0.2"
         },
         "compile": {
@@ -1681,6 +1708,18 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Jab.Attributes/0.10.1": {
+      "sha512": "9t3zrYjqT4p3Cxz/KUf5YpyN+8uh8I6YEkhqpHr7CQQPqlfZvgaY01cTGcgo7nkIaa/n362OcgCWkZrCZ16ICA==",
+      "type": "package",
+      "path": "jab.attributes/0.10.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "jab.attributes.0.10.1.nupkg.sha512",
+        "jab.attributes.nuspec",
+        "lib/netstandard2.0/Jab.Attributes.dll"
       ]
     },
     "MediatR/12.4.1": {
@@ -3039,6 +3078,22 @@
         "lib/netstandard2.0/Mono.TextTemplating.dll",
         "mono.texttemplating.2.2.1.nupkg.sha512",
         "mono.texttemplating.nuspec"
+      ]
+    },
+    "Raiqub.JabModules.MicrosoftExtensionsOptions/1.0.16": {
+      "sha512": "8sI9b6Yv3hpHi6ZjjkJ0X1HJmRcRznTBVGTQYBNgSFZgDiIEKkwUvaxrkAmzCgT97wLVSVn7noyCG98fJ9HCbw==",
+      "type": "package",
+      "path": "raiqub.jabmodules.microsoftextensionsoptions/1.0.16",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net6.0/Raiqub.JabModules.MicrosoftExtensionsOptions.dll",
+        "lib/net6.0/Raiqub.JabModules.MicrosoftExtensionsOptions.xml",
+        "lib/net8.0/Raiqub.JabModules.MicrosoftExtensionsOptions.dll",
+        "lib/net8.0/Raiqub.JabModules.MicrosoftExtensionsOptions.xml",
+        "raiqub.jabmodules.microsoftextensionsoptions.1.0.16.nupkg.sha512",
+        "raiqub.jabmodules.microsoftextensionsoptions.nuspec"
       ]
     },
     "System.CodeDom/4.4.0": {

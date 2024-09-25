@@ -35,7 +35,7 @@ namespace InsuranceHub.Application.Handlers
             var hashedPassword = _passwordHasher.Hash(command.Password);
 
             // Create a new user
-            var user = new User
+            var newUser = new User
             {
                 Id = Guid.NewGuid(),
                 Username = command.Username,
@@ -45,11 +45,14 @@ namespace InsuranceHub.Application.Handlers
                     PasswordHash = hashedPassword,
                     Salt=salt
                    // Salt = _passwordHasher.GetSalt()
-                }
+                },
+                Roles = command.Role,
+                Policies = new List<Policy>()
             };
 
             // Save the user
-            await _userRepository.AddAsync(user);
+            await _userRepository.AddAsync(newUser);
+            
         }
     }
 }

@@ -13,6 +13,7 @@
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.Extensions.Configuration": "8.0.0",
+          "Raiqub.JabModules.MicrosoftExtensionsOptions": "1.0.16",
           "System.IdentityModel.Tokens.Jwt": "8.0.2"
         },
         "runtime": {
@@ -24,6 +25,14 @@
           "lib/net6.0/BCrypt.Net-Next.dll": {
             "assemblyVersion": "4.0.3.0",
             "fileVersion": "4.0.3.0"
+          }
+        }
+      },
+      "Jab.Attributes/0.10.1": {
+        "runtime": {
+          "lib/netstandard2.0/Jab.Attributes.dll": {
+            "assemblyVersion": "0.10.1.0",
+            "fileVersion": "0.10.1.0"
           }
         }
       },
@@ -101,6 +110,18 @@
           }
         }
       },
+      "Microsoft.Extensions.Options/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
       "Microsoft.Extensions.Primitives/8.0.0": {
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
@@ -150,6 +171,18 @@
           }
         }
       },
+      "Raiqub.JabModules.MicrosoftExtensionsOptions/1.0.16": {
+        "dependencies": {
+          "Jab.Attributes": "0.10.1",
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Raiqub.JabModules.MicrosoftExtensionsOptions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.16.17319"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.0.2": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "8.0.2",
@@ -182,6 +215,13 @@
       "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
+    },
+    "Jab.Attributes/0.10.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9t3zrYjqT4p3Cxz/KUf5YpyN+8uh8I6YEkhqpHr7CQQPqlfZvgaY01cTGcgo7nkIaa/n362OcgCWkZrCZ16ICA==",
+      "path": "jab.attributes/0.10.1",
+      "hashPath": "jab.attributes.0.10.1.nupkg.sha512"
     },
     "MediatR/12.4.1": {
       "type": "package",
@@ -232,6 +272,13 @@
       "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Options/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JOVOfqpnqlVLUzINQ2fox8evY2SKLYJ3BV8QDe/Jyp21u1T7r45x/R/5QdteURMR5r01GxeJSBBUOCOyaNXA3g==",
+      "path": "microsoft.extensions.options/8.0.0",
+      "hashPath": "microsoft.extensions.options.8.0.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Primitives/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -266,6 +313,13 @@
       "sha512": "sha512-X58KyDBpGJZcCfmSgbkxJLLxd04eMFVaJlMEbRCyWL1X44n6kMxRyK6UTS1zgi5DHikeyiZj8bi7+p0kfPepLg==",
       "path": "microsoft.identitymodel.tokens/8.0.2",
       "hashPath": "microsoft.identitymodel.tokens.8.0.2.nupkg.sha512"
+    },
+    "Raiqub.JabModules.MicrosoftExtensionsOptions/1.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8sI9b6Yv3hpHi6ZjjkJ0X1HJmRcRznTBVGTQYBNgSFZgDiIEKkwUvaxrkAmzCgT97wLVSVn7noyCG98fJ9HCbw==",
+      "path": "raiqub.jabmodules.microsoftextensionsoptions/1.0.16",
+      "hashPath": "raiqub.jabmodules.microsoftextensionsoptions.1.0.16.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/8.0.2": {
       "type": "package",
