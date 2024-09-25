@@ -32,11 +32,18 @@ namespace InsuranceHub.Infrastructure.Data
                 });
             modelBuilder.Entity<User>()
                 .OwnsOne(u => u.Credentials);
+            modelBuilder.Entity<Role>()
+           .Property(r => r.RoleType)
+           .HasConversion(
+               v => v.ToString(),         
+               v => (UserRole)Enum.Parse(typeof(UserRole), v) 
+           );
 
             modelBuilder.Entity<Role>().HasData(
-         new Role { Id = Guid.NewGuid(), RoleType = UserRole.Admin },
          new Role { Id = Guid.NewGuid(), RoleType = UserRole.User },
-         new Role { Id = Guid.NewGuid(), RoleType = UserRole.Supervisor }
+         new Role { Id = Guid.NewGuid(), RoleType = UserRole.Admin },
+         new Role { Id = Guid.NewGuid(), RoleType = UserRole.Supervisor },
+         new Role { Id = Guid.NewGuid(), RoleType = UserRole.Customer }
      );
             modelBuilder.Entity<Customer>()
             .OwnsOne(c => c.EmailAddress, sa =>

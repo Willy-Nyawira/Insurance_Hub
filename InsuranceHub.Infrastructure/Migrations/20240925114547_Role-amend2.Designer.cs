@@ -4,6 +4,7 @@ using InsuranceHub.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240925114547_Role-amend2")]
+    partial class Roleamend2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,22 +134,22 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21914e00-a29c-485d-a8ab-89464776f6cf"),
-                            RoleType = "User"
-                        },
-                        new
-                        {
-                            Id = new Guid("7808cdc3-e9de-42cf-8b9f-d4a7d01b58e6"),
+                            Id = new Guid("d97b7a2c-2067-46de-ab7e-9f3d83d7a00c"),
                             RoleType = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("494e79d1-aed9-47d0-84c9-589f575752d2"),
+                            Id = new Guid("f45cc818-7107-4df8-b6e9-1afb7b5b2de2"),
+                            RoleType = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("5402477f-3fb1-4e2c-9fad-32832c76db98"),
                             RoleType = "Supervisor"
                         },
                         new
                         {
-                            Id = new Guid("f86c3207-679a-49bb-8a73-289e8536b51a"),
+                            Id = new Guid("1a81df43-6386-40b4-94e1-bb9c9fec5680"),
                             RoleType = "Customer"
                         });
                 });

@@ -4,6 +4,7 @@ using InsuranceHub.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240925114245_Role-amend")]
+    partial class Roleamend
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,23 +134,18 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21914e00-a29c-485d-a8ab-89464776f6cf"),
-                            RoleType = "User"
-                        },
-                        new
-                        {
-                            Id = new Guid("7808cdc3-e9de-42cf-8b9f-d4a7d01b58e6"),
+                            Id = new Guid("6f989642-3006-4f12-9ab6-3b9d3f61f096"),
                             RoleType = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("494e79d1-aed9-47d0-84c9-589f575752d2"),
-                            RoleType = "Supervisor"
+                            Id = new Guid("be360689-8447-4095-a97c-d0acdd318092"),
+                            RoleType = "User"
                         },
                         new
                         {
-                            Id = new Guid("f86c3207-679a-49bb-8a73-289e8536b51a"),
-                            RoleType = "Customer"
+                            Id = new Guid("bd43d907-4f7a-4891-9c05-badb696cc3ba"),
+                            RoleType = "Supervisor"
                         });
                 });
 

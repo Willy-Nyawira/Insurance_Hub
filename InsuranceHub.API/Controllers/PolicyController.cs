@@ -38,7 +38,7 @@ namespace InsuranceHub.API.Controllers
             _getPoliciesByCustomerUseCase = getPoliciesByCustomerUseCase;
             _getCustomerByUsernameUseCase = getCustomerByUsernameUseCase;
         }
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         [HttpPost("create")]
         public async Task<IActionResult> CreatePolicy([FromBody] CreatePolicyDto createPolicyDto)
         {
