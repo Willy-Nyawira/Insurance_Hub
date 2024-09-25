@@ -17,17 +17,28 @@ namespace InsuranceHub.API.Controllers
     {
         private readonly RegisterPolicyUseCase _registerPolicyUseCase;
         private readonly GetPolicyByIdUseCase _getPolicyByIdUseCase;
+        private readonly DeletePolicyUseCase _deletePolicyUseCase;
+        private readonly UpdatePolicyUseCase _updatePolicyUseCase;
+        private readonly GetPoliciesByCustomerUseCase _getPoliciesByCustomerUseCase;
+        private readonly GetCustomerByUsernameUseCase _getCustomerByUsernameUseCase;
         private readonly IPolicyRepository _policyRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PolicyController(RegisterPolicyUseCase registerPolicyUseCase, GetPolicyByIdUseCase getPolicyByIdUseCase, IHttpContextAccessor httpContextAccessor, IPolicyRepository policyRepository)
+        public PolicyController(RegisterPolicyUseCase registerPolicyUseCase, GetPolicyByIdUseCase getPolicyByIdUseCase,
+            IHttpContextAccessor httpContextAccessor, IPolicyRepository policyRepository,
+            DeletePolicyUseCase deletePolicyUseCase, UpdatePolicyUseCase updatePolicyUseCase,
+            GetPoliciesByCustomerUseCase getPoliciesByCustomerUseCase, GetCustomerByUsernameUseCase getCustomerByUsernameUseCase)
         {
             _registerPolicyUseCase = registerPolicyUseCase;
             _getPolicyByIdUseCase = getPolicyByIdUseCase;
             _policyRepository = policyRepository;
             _httpContextAccessor = httpContextAccessor;
+            _deletePolicyUseCase = deletePolicyUseCase;
+            _updatePolicyUseCase = updatePolicyUseCase;
+            _getPoliciesByCustomerUseCase = getPoliciesByCustomerUseCase;
+            _getCustomerByUsernameUseCase = getCustomerByUsernameUseCase;
         }
-
+        [Authorize(Roles = "User")]
         [HttpPost("create")]
         public async Task<IActionResult> CreatePolicy([FromBody] CreatePolicyDto createPolicyDto)
         {
@@ -44,7 +55,7 @@ namespace InsuranceHub.API.Controllers
             var policyId = await _registerPolicyUseCase.Execute(createPolicyDto, userId);
             return Ok(new { PolicyId = policyId, Message = "Policy created successfully." });
         }
-
+        [Authorize(Roles = "Admin,Customer,User")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPolicyById(Guid id)
         {
@@ -53,6 +64,47 @@ namespace InsuranceHub.API.Controllers
                 return NotFound();
 
             return Ok(policyDto);
+        }
+        [Authorize(Roles = "Admin,User")]
+        [HttpGet]
+        public async Task<IActionResult> GetPolicies()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name) ??
+                              _httpContextAccessor.HttpContext.User.FindFirst("unique_name");
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User not logged in");
+            }
+
+            var username = userIdClaim.Value;
+
+            // Get the customer based on username (you need to implement this use case)
+            var customer = await _getCustomerByUsernameUseCase.Execute(username);
+
+            if (customer == null)
+            {
+                return NotFound("Customer not found.");
+            }
+
+            // Fetch policies using the GetPoliciesByCustomerUseCase
+            var policies = await _getPoliciesByCustomerUseCase.Execute(customer.Id);
+
+            return Ok(policies);
+        }
+        [Authorize(Roles = "Admin,User")]
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdatePolicy([FromBody] UpdatePolicyDto updatePolicyDto)
+        {
+            await _updatePolicyUseCase.ExecuteAsync(updatePolicyDto);
+            return Ok(new { Message = "Policy updated successfully." });
+        }
+        [Authorize(Roles = "Admin,User")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePolicy(Guid id)
+        {
+            await _deletePolicyUseCase.ExecuteAsync(id);
+            return Ok(new { Message = "Policy deleted successfully." });
         }
     }
 }

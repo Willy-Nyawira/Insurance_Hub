@@ -74,7 +74,11 @@ namespace InsuranceHub.API
             builder.Services.AddScoped<GetCustomerByIdUseCase>();
             builder.Services.AddScoped<GetCustomerByUsernameUseCase>();
             builder.Services.AddHttpContextAccessor();
-           
+            builder.Services.AddScoped<DeletePolicyUseCase>();
+            builder.Services.AddScoped<UpdatePolicyUseCase>();
+            builder.Services.AddScoped<GetPoliciesByCustomerUseCase>();
+          
+
 
 
 
