@@ -52,5 +52,10 @@ namespace InsuranceHub.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<Policy>> GetAllPoliciesAsync()
+        {
+            return await _dbContext.Policies.ToListAsync();
+        }
+
     }
 }

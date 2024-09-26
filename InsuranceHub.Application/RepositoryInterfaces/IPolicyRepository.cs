@@ -14,6 +14,8 @@ namespace InsuranceHub.Application.RepositoryInterfaces
         Task AddAsync(Policy policy);
         Task UpdateAsync(Policy policy);
         Task DeleteAsync(Guid id);
-        
+        Task<IEnumerable<Policy>> GetAllPoliciesAsync();
+
+
     }
 }

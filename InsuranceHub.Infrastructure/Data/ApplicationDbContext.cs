@@ -19,6 +19,7 @@ namespace InsuranceHub.Infrastructure.Data
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Policy> Policies { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

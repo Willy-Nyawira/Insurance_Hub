@@ -23,11 +23,13 @@ namespace InsuranceHub.API.Controllers
         private readonly GetCustomerByUsernameUseCase _getCustomerByUsernameUseCase;
         private readonly IPolicyRepository _policyRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly PurchasePolicyUseCase _purchasePolicyUseCase;
 
         public PolicyController(RegisterPolicyUseCase registerPolicyUseCase, GetPolicyByIdUseCase getPolicyByIdUseCase,
             IHttpContextAccessor httpContextAccessor, IPolicyRepository policyRepository,
             DeletePolicyUseCase deletePolicyUseCase, UpdatePolicyUseCase updatePolicyUseCase,
-            GetPoliciesByCustomerUseCase getPoliciesByCustomerUseCase, GetCustomerByUsernameUseCase getCustomerByUsernameUseCase)
+            GetPoliciesByCustomerUseCase getPoliciesByCustomerUseCase,
+            GetCustomerByUsernameUseCase getCustomerByUsernameUseCase, PurchasePolicyUseCase purchasePolicyUseCase)
         {
             _registerPolicyUseCase = registerPolicyUseCase;
             _getPolicyByIdUseCase = getPolicyByIdUseCase;
@@ -37,6 +39,7 @@ namespace InsuranceHub.API.Controllers
             _updatePolicyUseCase = updatePolicyUseCase;
             _getPoliciesByCustomerUseCase = getPoliciesByCustomerUseCase;
             _getCustomerByUsernameUseCase = getCustomerByUsernameUseCase;
+            _purchasePolicyUseCase = purchasePolicyUseCase;
         }
         [Authorize(Roles = "User,Admin")]
         [HttpPost("create")]
@@ -65,8 +68,8 @@ namespace InsuranceHub.API.Controllers
 
             return Ok(policyDto);
         }
-        [Authorize(Roles = "Admin,User")]
-        [HttpGet]
+        [Authorize(Roles = "Admin,User,Customer")]
+        [HttpGet("my_policies")]
         public async Task<IActionResult> GetPolicies()
         {
             var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name) ??
@@ -96,15 +99,58 @@ namespace InsuranceHub.API.Controllers
         [HttpPut("update")]
         public async Task<IActionResult> UpdatePolicy([FromBody] UpdatePolicyDto updatePolicyDto)
         {
+            // First, search for the policy by its ID
+            var policy = await _getPolicyByIdUseCase.ExecuteAsync(updatePolicyDto.Id);
+
+            if (policy == null)
+            {
+                return NotFound(new { Message = "Policy not found." });
+            }
+
+            // Proceed with updating the policy
             await _updatePolicyUseCase.ExecuteAsync(updatePolicyDto);
             return Ok(new { Message = "Policy updated successfully." });
         }
+
         [Authorize(Roles = "Admin,User")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePolicy(Guid id)
         {
             await _deletePolicyUseCase.ExecuteAsync(id);
             return Ok(new { Message = "Policy deleted successfully." });
+        }
+        [Authorize(Roles = "Admin,User,Customer")]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllPolicies()
+        {
+            // Retrieve all policies using a repository or use case
+            var policies = await _policyRepository.GetAllPoliciesAsync();
+
+            if (policies == null || !policies.Any())
+            {
+                return NotFound(new { Message = "No policies found." });
+            }
+
+            return Ok(policies);
+        }
+
+        [HttpPost("{id}/buy")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> BuyPolicy(Guid id)
+        {
+            try
+            {
+                var invoice = await _purchasePolicyUseCase.Execute(id);
+                return Ok(new { Message = "Policy purchased successfully", InvoiceId = invoice.Id });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

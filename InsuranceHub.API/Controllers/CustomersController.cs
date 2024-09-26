@@ -1,10 +1,12 @@
-﻿using InsuranceHub.Application.Commands;
+﻿using System.Security.Claims;
+using InsuranceHub.Application.Commands;
 using InsuranceHub.Application.DTOS;
 using InsuranceHub.Application.Handlers;
 using InsuranceHub.Application.RepositoryInterfaces;
 using InsuranceHub.Application.ServiceInterfaces;
 using InsuranceHub.Application.UseCases;
 using InsuranceHub.Domain.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceHub.API.Controllers
@@ -21,22 +23,32 @@ namespace InsuranceHub.API.Controllers
         private readonly ICustomerRepository _customerRepository;
         private readonly ITokenService _tokenService;
         private readonly IEmailService _emailService;
+        private readonly DeletePolicyUseCase _deletePolicyUseCase;
+        private readonly UpdatePolicyUseCase _updatePolicyUseCase;
+        private readonly GetPoliciesByCustomerUseCase _getPoliciesByCustomerUseCase;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public CustomersController( GetCustomerByIdUseCase getCustomerByIdUseCase, IEmailService emailservice,ITokenService tokenService,
             GetCustomerByUsernameUseCase getCustomerByUsernameUseCase,CustomerLoginUseCase customerLoginUseCase,
-             ICustomerRepository customerRepository, IPasswordHasher passwordHasher)
+             ICustomerRepository customerRepository, IPasswordHasher passwordHasher,DeletePolicyUseCase deletePolicyUseCase,
+             UpdatePolicyUseCase updatePolicyUseCase,GetPoliciesByCustomerUseCase getPoliciesByCustomerUseCase, IHttpContextAccessor httpContextAccessor)
         {
             
             _getCustomerByIdUseCase = getCustomerByIdUseCase;
             _getCustomerByUsernameUseCase = getCustomerByUsernameUseCase;
+            _getPoliciesByCustomerUseCase = getPoliciesByCustomerUseCase;
             _customerLoginUseCase = customerLoginUseCase;
             _customerRepository = customerRepository;
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
             _emailService = emailservice;
+            _deletePolicyUseCase=deletePolicyUseCase;
+            _updatePolicyUseCase = updatePolicyUseCase;
+            _httpContextAccessor = httpContextAccessor;
+
         }
 
-        [HttpPost("Register Customer")]
+    [HttpPost("Register Customer")]
         public async Task<IActionResult> Register([FromBody] RegisterCustomerCommand command)
         {
             if (!ModelState.IsValid)
@@ -70,6 +82,7 @@ namespace InsuranceHub.API.Controllers
                 return NotFound(ex.Message);
             }
         }
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
@@ -133,5 +146,6 @@ namespace InsuranceHub.API.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+       
     }
 }

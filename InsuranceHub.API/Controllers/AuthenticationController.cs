@@ -1,6 +1,7 @@
 ﻿using InsuranceHub.Application.Commands;
 using InsuranceHub.Application.Handlers;
 using InsuranceHub.Domain.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace InsuranceHub.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {

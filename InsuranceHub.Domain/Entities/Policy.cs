@@ -19,11 +19,17 @@ namespace InsuranceHub.Domain.Entities
         public string CreatedBy { get; set; }
         public User User { get; set; }
 
+        public PaymentFrequency PaymentFrequency { get; set; }
+
         // Generate policy number with a pattern
         public void GeneratePolicyNumber()
         {
             // Example: "POL-20240916-0001"
             PolicyNumber = $"POL-{DateTime.UtcNow:yyyyMMdd}-{new Random().Next(1000, 9999)}";
+        }
+        public bool IsPolicyActive()
+        {
+            return DateTime.UtcNow >= StartDate && DateTime.UtcNow <= EndDate;
         }
     }
 }

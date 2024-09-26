@@ -68,6 +68,7 @@ namespace InsuranceHub.API
             builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             builder.Services.AddScoped<RegisterUserCommandHandler>();
             builder.Services.AddScoped<LoginUserCommandHandler>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -77,7 +78,8 @@ namespace InsuranceHub.API
             builder.Services.AddScoped<DeletePolicyUseCase>();
             builder.Services.AddScoped<UpdatePolicyUseCase>();
             builder.Services.AddScoped<GetPoliciesByCustomerUseCase>();
-          
+            builder.Services.AddScoped<PurchasePolicyUseCase>();
+
 
 
 
