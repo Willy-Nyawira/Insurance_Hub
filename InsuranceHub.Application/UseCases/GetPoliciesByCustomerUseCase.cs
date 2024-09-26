@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using InsuranceHub.Application.DTOS;
 using InsuranceHub.Application.RepositoryInterfaces;
+using InsuranceHub.Domain.Entities;
 
 namespace InsuranceHub.Application.UseCases
 {
@@ -19,19 +19,23 @@ namespace InsuranceHub.Application.UseCases
 
         public async Task<IEnumerable<PolicyDto>> Execute(Guid customerId)
         {
-            var policies = await _policyRepository.GetByCustomerIdAsync(customerId);
-            return policies.Select(policy => new PolicyDto
-            {
-                Id = policy.Id,
-                PolicyNumber = policy.PolicyNumber,
-                PolicyType = policy.PolicyType,
-                PremiumAmount = policy.PremiumAmount,
-                StartDate = policy.StartDate,
-                EndDate = policy.EndDate,
-                CustomerId = customerId,
-                UserName = policy.CreatedBy
-            }).ToList();
-        }
+            var policyCustomerAssociations = await _policyRepository.GetAllPoliciesWithCustomersAsync();
 
+            var policies = policyCustomerAssociations
+                .Where(pca => pca.CustomerId == customerId)
+                .Select(pca => new PolicyDto
+                {
+                    Id = pca.Policy.Id,
+                    PolicyNumber = pca.Policy.PolicyNumber,
+                    PolicyType = pca.Policy.PolicyType,
+                    PremiumAmount = pca.Policy.PremiumAmount,
+                    StartDate = pca.Policy.StartDate,
+                    EndDate = pca.Policy.EndDate,
+                    CustomerId = customerId,
+                    UserName = pca.Policy.CreatedBy 
+                }).ToList();
+
+            return policies;
+        }
     }
 }

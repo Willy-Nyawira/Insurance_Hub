@@ -11,5 +11,6 @@ namespace InsuranceHub.Application.RepositoryInterfaces
     {
         Task CreateInvoiceAsync(Invoice invoice);
         Task<Invoice> GetInvoiceByIdAsync(Guid invoiceId);
+        Task<Guid> GetCustomerIdByUsernameAsync(string username);
     }
 }

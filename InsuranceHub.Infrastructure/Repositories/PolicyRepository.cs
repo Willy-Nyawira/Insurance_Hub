@@ -24,10 +24,12 @@ namespace InsuranceHub.Infrastructure.Repositories
             return await _dbContext.Policies.FindAsync(policyId);
         }
 
-        public async Task<IEnumerable<Policy>> GetByCustomerIdAsync(Guid userId)
+        public async Task<IEnumerable<Policy>> GetByCustomerIdAsync(Guid customerId)
         {
-            return await _dbContext.Policies
-                .Where(p => p.UserId == userId)
+            return await _dbContext.PolicyCustomerAssociations
+                .Where(pca => pca.CustomerId == customerId)
+                .Include(pca => pca.Policy)
+                .Select(pca => pca.Policy)
                 .ToListAsync();
         }
 
@@ -56,6 +58,27 @@ namespace InsuranceHub.Infrastructure.Repositories
         {
             return await _dbContext.Policies.ToListAsync();
         }
+        public async Task<IEnumerable<PolicyCustomerAssociation>> GetAllPoliciesWithCustomersAsync()
+        {
+            return await _dbContext.PolicyCustomerAssociations
+                .Include(pca => pca.Policy)
+                .Include(pca => pca.Customer)
+                .ToListAsync();
+        }
+        public async Task AddPolicyCustomerAssociationAsync(Guid policyId, Guid customerId)
+        {
+            var association = new PolicyCustomerAssociation
+            {
+                PolicyId = policyId,
+                CustomerId = customerId
+            };
+
+            await _dbContext.PolicyCustomerAssociations.AddAsync(association);
+            await _dbContext.SaveChangesAsync();
+        }
 
     }
+
+
 }
+

@@ -91,9 +91,8 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.Property<Guid>("PolicyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PolicyType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PolicyType")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
@@ -109,6 +108,10 @@ namespace InsuranceHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -119,6 +122,9 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PaymentFrequency")
                         .HasColumnType("int");
 
@@ -126,9 +132,8 @@ namespace InsuranceHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PolicyType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PolicyType")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("PremiumAmount")
                         .HasColumnType("decimal(18,2)");
@@ -148,6 +153,27 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.ToTable("Policies");
                 });
 
+            modelBuilder.Entity("InsuranceHub.Domain.Entities.PolicyCustomerAssociation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PolicyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("PolicyId");
+
+                    b.ToTable("PolicyCustomerAssociations");
+                });
+
             modelBuilder.Entity("InsuranceHub.Domain.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -165,22 +191,22 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ff2f1abb-8f60-4f69-8e4f-a5684a047b0e"),
+                            Id = new Guid("48577008-c11b-4664-bc22-ba0be81fb36c"),
                             RoleType = "User"
                         },
                         new
                         {
-                            Id = new Guid("d07f2d21-18ed-4012-9541-aae9d91d803c"),
+                            Id = new Guid("c137fb22-4f8f-4400-8f75-6f7b9eb8e650"),
                             RoleType = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("08a62c67-e921-4201-918c-bc70ee6b145a"),
+                            Id = new Guid("46243ce9-0bc1-4b43-b56a-cae58ff6a2ad"),
                             RoleType = "Supervisor"
                         },
                         new
                         {
-                            Id = new Guid("aff3cb80-1b5b-458c-9e9b-8be9121a4cbf"),
+                            Id = new Guid("dfbb2589-91c7-4ef7-a72d-b547c4d500f3"),
                             RoleType = "Customer"
                         });
                 });
@@ -240,6 +266,25 @@ namespace InsuranceHub.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("InsuranceHub.Domain.Entities.PolicyCustomerAssociation", b =>
+                {
+                    b.HasOne("InsuranceHub.Domain.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InsuranceHub.Domain.Entities.Policy", "Policy")
+                        .WithMany()
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Policy");
                 });
 
             modelBuilder.Entity("InsuranceHub.Domain.Entities.User", b =>

@@ -49,6 +49,7 @@ namespace InsuranceHub.Application.UseCases
             var policy = new Policy
             {
                 PolicyType = createPolicyDto.PolicyType,
+                Category = createPolicyDto.Category,
                 PremiumAmount = createPolicyDto.PremiumAmount,
                 StartDate = createPolicyDto.StartDate,
                 EndDate = createPolicyDto.EndDate,

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240913093726_update_policy2")]
-    partial class update_policy2
+    [Migration("20240926094511_tableadd")]
+    partial class tableadd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,8 +35,8 @@ namespace InsuranceHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("Dob")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("Dob")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -75,25 +75,68 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("InsuranceHub.Domain.Entities.Invoice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CustomerUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentFrequency")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("PolicyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PolicyType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Invoices");
+                });
+
             modelBuilder.Entity("InsuranceHub.Domain.Entities.Policy", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomerId")
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PaymentFrequency")
+                        .HasColumnType("int");
+
                     b.Property<string>("PolicyNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PolicyType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PolicyType")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("PremiumAmount")
                         .HasColumnType("decimal(18,2)");
@@ -101,7 +144,7 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -113,14 +156,36 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.ToTable("Policies");
                 });
 
+            modelBuilder.Entity("InsuranceHub.Domain.Entities.PolicyCustomerAssociation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PolicyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("PolicyId");
+
+                    b.ToTable("PolicyCustomerAssociations");
+                });
+
             modelBuilder.Entity("InsuranceHub.Domain.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("RoleType")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -129,18 +194,23 @@ namespace InsuranceHub.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c6c89ad8-b587-461c-8dd9-377a1b453398"),
-                            RoleType = 0
+                            Id = new Guid("48577008-c11b-4664-bc22-ba0be81fb36c"),
+                            RoleType = "User"
                         },
                         new
                         {
-                            Id = new Guid("9b96380f-fa2d-48a9-a087-a8bd12295e9f"),
-                            RoleType = 1
+                            Id = new Guid("c137fb22-4f8f-4400-8f75-6f7b9eb8e650"),
+                            RoleType = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("b31f4610-7e18-463a-9ba3-b33b589e6a90"),
-                            RoleType = 2
+                            Id = new Guid("46243ce9-0bc1-4b43-b56a-cae58ff6a2ad"),
+                            RoleType = "Supervisor"
+                        },
+                        new
+                        {
+                            Id = new Guid("dfbb2589-91c7-4ef7-a72d-b547c4d500f3"),
+                            RoleType = "Customer"
                         });
                 });
 
@@ -188,17 +258,36 @@ namespace InsuranceHub.Infrastructure.Migrations
 
             modelBuilder.Entity("InsuranceHub.Domain.Entities.Policy", b =>
                 {
-                    b.HasOne("InsuranceHub.Domain.Entities.Customer", "Customer")
+                    b.HasOne("InsuranceHub.Domain.Entities.Customer", null)
                         .WithMany("Policies")
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("InsuranceHub.Domain.Entities.User", "User")
+                        .WithMany("Policies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("InsuranceHub.Domain.Entities.PolicyCustomerAssociation", b =>
+                {
+                    b.HasOne("InsuranceHub.Domain.Entities.Customer", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InsuranceHub.Domain.Entities.User", null)
-                        .WithMany("Policies")
-                        .HasForeignKey("UserId");
+                    b.HasOne("InsuranceHub.Domain.Entities.Policy", "Policy")
+                        .WithMany()
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Policy");
                 });
 
             modelBuilder.Entity("InsuranceHub.Domain.Entities.User", b =>

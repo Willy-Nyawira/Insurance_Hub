@@ -21,6 +21,8 @@ namespace InsuranceHub.Infrastructure.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Policy> Policies { get; set; }
+
+        public DbSet<PolicyCustomerAssociation> PolicyCustomerAssociations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -55,6 +57,17 @@ namespace InsuranceHub.Infrastructure.Data
         .HasOne(p => p.User)
         .WithMany(u => u.Policies)
         .HasForeignKey(p => p.UserId);
+
+            modelBuilder.Entity<PolicyCustomerAssociation>()
+                       .HasOne(pca => pca.Policy)
+                       .WithMany() // Assuming a policy can have many customer associations
+                       .HasForeignKey(pca => pca.PolicyId);
+
+            modelBuilder.Entity<PolicyCustomerAssociation>()
+                .HasOne(pca => pca.Customer)
+                .WithMany() // Assuming a customer can have many policies
+                .HasForeignKey(pca => pca.CustomerId);
+
         }
     }
 }

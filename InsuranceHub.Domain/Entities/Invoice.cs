@@ -14,7 +14,7 @@ namespace InsuranceHub.Domain.Entities
         public Guid PolicyId { get; set; } 
         public DateTime PurchaseDate { get; set; }
         public decimal Amount { get; set; } 
-        public string PolicyType { get; set; }
+        public PolicyType PolicyType { get; set; }
         public PaymentFrequency PaymentFrequency { get; set; }
     }
 }

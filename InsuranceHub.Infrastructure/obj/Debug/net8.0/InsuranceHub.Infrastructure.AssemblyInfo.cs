@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InsuranceHub.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c586107eedfa5eb44f3537d8ca4a409d1ddc1100")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9302974e84a860bec28a1ea30db36f7a549f838c")]
 [assembly: System.Reflection.AssemblyProductAttribute("InsuranceHub.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InsuranceHub.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

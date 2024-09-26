@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InsuranceHub.Application.RepositoryInterfaces;
 using InsuranceHub.Domain.Entities;
 using InsuranceHub.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceHub.Infrastructure.Repositories
 {
@@ -27,6 +28,15 @@ namespace InsuranceHub.Infrastructure.Repositories
         public async Task<Invoice> GetInvoiceByIdAsync(Guid invoiceId)
         {
             return await _context.Invoices.FindAsync(invoiceId);
+        }
+        public async Task<Guid> GetCustomerIdByUsernameAsync(string username)
+        {
+            // Logic to retrieve customer ID from the database based on the username
+            var customer = await _context.Customers
+                .Where(c => c.Username == username)
+                .FirstOrDefaultAsync();
+
+            return customer?.Id ?? Guid.Empty; // Return Guid.Empty if not found
         }
     }
 }

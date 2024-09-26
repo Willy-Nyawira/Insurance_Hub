@@ -38,6 +38,7 @@ namespace InsuranceHub.Application.UseCases
             var customerUsername = userIdClaim.Value;
 
             // Fetch the policy
+
             var policy = await _policyRepository.GetPolicyByIdAsync(policyId);
             if (policy == null)
             {
@@ -60,6 +61,16 @@ namespace InsuranceHub.Application.UseCases
 
             // Save invoice
             await _invoiceRepository.CreateInvoiceAsync(invoice);
+            // Assuming you have a method to get the customer ID by username
+            var customerId = await _invoiceRepository.GetCustomerIdByUsernameAsync(customerUsername);
+            if (customerId == Guid.Empty)
+            {
+                throw new ArgumentException("Customer ID not found");
+            }
+
+
+            await _policyRepository.AddPolicyCustomerAssociationAsync(policy.Id, customerId);
+
 
             return invoice;
         }

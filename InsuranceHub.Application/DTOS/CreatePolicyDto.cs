@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InsuranceHub.Domain.Enums;
 
 namespace InsuranceHub.Application.DTOS
 {
@@ -13,7 +14,9 @@ namespace InsuranceHub.Application.DTOS
         
 
         [Required]
-        public string PolicyType { get; set; }
+        public PolicyType PolicyType { get; set; }
+        [Required]
+        public string Category { get; set; }
 
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Premium Amount must be greater than 0")]
@@ -24,6 +27,8 @@ namespace InsuranceHub.Application.DTOS
 
         [Required]
         public DateTime EndDate { get; set; }
-        
+        [Required]
+        public PaymentFrequency PaymentFrequency { get; set; }
+
     }
 }

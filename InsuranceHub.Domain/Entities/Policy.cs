@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace InsuranceHub.Domain.Entities
     {
         public Guid Id { get; set; }= Guid.NewGuid();
         public string PolicyNumber { get; set; }
-        public string PolicyType { get; set; }
+        public PolicyType PolicyType { get; set; }
+        public String Category { get; set; } 
         public decimal PremiumAmount { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -19,7 +21,9 @@ namespace InsuranceHub.Domain.Entities
         public string CreatedBy { get; set; }
         public User User { get; set; }
 
+
         public PaymentFrequency PaymentFrequency { get; set; }
+        public bool IsActive { get; set; } = true;
 
         // Generate policy number with a pattern
         public void GeneratePolicyNumber()
