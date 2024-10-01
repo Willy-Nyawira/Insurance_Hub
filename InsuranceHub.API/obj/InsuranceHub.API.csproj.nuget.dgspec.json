@@ -32,6 +32,9 @@
               "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Application\\InsuranceHub.Application.csproj": {
                 "projectPath": "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Application\\InsuranceHub.Application.csproj"
               },
+              "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Domain\\InsuranceHub.Domain.csproj": {
+                "projectPath": "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Domain\\InsuranceHub.Domain.csproj"
+              },
               "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Infrastructure\\InsuranceHub.Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Infrastructure\\InsuranceHub.Infrastructure.csproj"
               }
@@ -146,6 +149,10 @@
               "version": "[2.2.0, )"
             },
             "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
               "target": "Package",
               "version": "[8.0.0, )"
             },

@@ -1671,6 +1671,7 @@
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.Extensions.Configuration": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
           "Raiqub.JabModules.MicrosoftExtensionsOptions": "1.0.16",
           "System.IdentityModel.Tokens.Jwt": "8.0.2"
         },
@@ -4522,6 +4523,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "InsuranceHub.Application >= 1.0.0",
+      "InsuranceHub.Domain >= 1.0.0",
       "InsuranceHub.Infrastructure >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
       "Swashbuckle.AspNetCore >= 6.4.0"
@@ -4557,6 +4559,9 @@
           "projectReferences": {
             "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Application\\InsuranceHub.Application.csproj": {
               "projectPath": "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Application\\InsuranceHub.Application.csproj"
+            },
+            "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Domain\\InsuranceHub.Domain.csproj": {
+              "projectPath": "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Domain\\InsuranceHub.Domain.csproj"
             },
             "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Infrastructure\\InsuranceHub.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\Willy.nyawira\\Documents\\Insurance_Hub\\InsuranceHub.API\\InsuranceHub.Infrastructure\\InsuranceHub.Infrastructure.csproj"

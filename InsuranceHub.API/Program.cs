@@ -28,6 +28,8 @@ namespace InsuranceHub.API
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddHttpClient<MpesaPaymentService>();
+
 
 
 
@@ -64,7 +66,7 @@ namespace InsuranceHub.API
                 };
             });
 
-            // Register application services
+          
             builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();

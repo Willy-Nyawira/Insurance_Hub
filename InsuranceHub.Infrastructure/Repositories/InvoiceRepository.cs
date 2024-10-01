@@ -38,5 +38,18 @@ namespace InsuranceHub.Infrastructure.Repositories
 
             return customer?.Id ?? Guid.Empty; // Return Guid.Empty if not found
         }
+        public async Task<Invoice> GetInvoiceByCheckoutRequestIdAsync(string checkoutRequestId)
+        {
+            return await _context.Invoices
+                .Where(i => i.CheckoutRequestId == checkoutRequestId)
+                .FirstOrDefaultAsync();
+        }
+
+        // Implementation of UpdateInvoiceAsync
+        public async Task UpdateInvoiceAsync(Invoice invoice)
+        {
+            _context.Invoices.Update(invoice);
+            await _context.SaveChangesAsync();
+        }
     }
 }

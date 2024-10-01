@@ -124,8 +124,8 @@ C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Domain.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Infrastructure.dll
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Application.pdb
-C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Infrastructure.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Domain.pdb
+C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\bin\Debug\net8.0\InsuranceHub.Infrastructure.pdb
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.csproj.AssemblyReference.cache
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Willy.nyawira\Documents\Insurance_Hub\InsuranceHub.API\InsuranceHub.API\obj\Debug\net8.0\InsuranceHub.API.AssemblyInfoInputs.cache

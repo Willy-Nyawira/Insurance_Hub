@@ -928,6 +928,7 @@
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.Extensions.Configuration": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
           "Raiqub.JabModules.MicrosoftExtensionsOptions": "1.0.16",
           "System.IdentityModel.Tokens.Jwt": "8.0.2"
         },
