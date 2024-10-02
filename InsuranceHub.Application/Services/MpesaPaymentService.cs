@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -15,87 +17,134 @@ namespace InsuranceHub.Application.Services
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly ILogger<MpesaPaymentService> _logger;
-        private readonly string _baseUrl;
+        private string _accessToken;
+        private DateTime _accessTokenExpiration;
 
         public MpesaPaymentService(HttpClient httpClient, IConfiguration configuration, ILogger<MpesaPaymentService> logger)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _logger = logger;
-            _baseUrl = _configuration["Mpesa:BaseUrl"];
+            SetBasicAuthHeader();
         }
 
-        // Method to get OAuth token from Mpesa
-        public async Task<string> GetOAuthTokenAsync()
+        private void SetBasicAuthHeader()
+        {
+            var consumerKey = _configuration["Mpesa:ConsumerKey"];
+            var consumerSecret = _configuration["Mpesa:ConsumerSecret"];
+
+            if (string.IsNullOrEmpty(consumerKey) || string.IsNullOrEmpty(consumerSecret))
+            {
+                throw new ArgumentException("Missing required M-Pesa credentials");
+            }
+
+            var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{consumerKey}:{consumerSecret}"));
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+            _logger.LogInformation($"Set Authorization header with Basic {auth.Substring(0, 5)}...");
+        }
+
+        private async Task<string> GetAccessTokenAsync()
         {
             try
             {
-                var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes(
-         $"{_configuration["Mpesa:ConsumerKey"]}:{_configuration["Mpesa:ConsumerSecret"]}"));
-
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", auth);
-
-                var response = await _httpClient.GetAsync($"{_baseUrl}{_configuration["Mpesa:TokenUrl"]}");
+                var response = await _httpClient.GetAsync("oauth/v1/generate?grant_type=client_credentials");
                 response.EnsureSuccessStatusCode();
 
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var tokenResponse = JsonSerializer.Deserialize<MpesaTokenResponse>(jsonResponse);
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation("OAuth Token Response: {Response}", jsonResponse);
 
-                return tokenResponse.AccessToken;
+                var tokenResponse = JsonSerializer.Deserialize<MpesaTokenResponse>(jsonResponse);
+                _accessToken = tokenResponse.AccessToken;
+                _accessTokenExpiration = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
+
+                return _accessToken;
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError(ex, "Error retrieving OAuth token from M-Pesa.");
-                throw new Exception("Failed to retrieve OAuth token from M-Pesa.", ex);
+                _logger.LogError(ex, "Error retrieving OAuth token from M-Pesa");
+                throw;
             }
         }
 
-        public async Task<MpesaStkPushResponse> InitiateStkPushAsync(string phoneNumber, decimal amount)
+        public async Task<MpesaStkPushResponse> InitiateStkPushAsync(string phoneNumber, decimal amount, int maxRetries = 3)
         {
+            var stopwatch = Stopwatch.StartNew();
             try
             {
-                var token = await GetOAuthTokenAsync();
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                await EnsureValidAccessTokenAsync();
 
-                var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmss");
-                var password = Convert.ToBase64String(Encoding.UTF8.GetBytes(
-                    _configuration["Mpesa:ShortCode"] + _configuration["Mpesa:Passkey"] + timestamp));
-                var accountReference = "InsurancePayment";
-
-                var stkPushRequest = new
-                {
-                    BusinessShortCode = _configuration["Mpesa:ShortCode"],
-                    Password = password,
-                    Timestamp = timestamp,
-                    TransactionType = "CustomerPayBillOnline",
-                    Amount = amount,
-                    PartyA = phoneNumber,
-                    PartyB = _configuration["Mpesa:ShortCode"],
-                    PhoneNumber = phoneNumber,
-                    CallBackURL = $"{_configuration["Application:Domain"]}/api/payments/mpesa/callback",
-                    AccountReference = accountReference,
-                    TransactionDesc = "Payment for policy"
-                };
-
+                var stkPushRequest = CreateStkPushRequest(phoneNumber, amount);
                 var content = new StringContent(JsonSerializer.Serialize(stkPushRequest), Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync($"{_baseUrl}{_configuration["Mpesa:StkPushUrl"]}", content);
-                response.EnsureSuccessStatusCode();
+                var fullUrl = $"{_configuration["Mpesa:BaseUrl"]}{_configuration["Mpesa:StkPushUrl"]}";
+                _logger.LogInformation($"Sending STK Push request to: {fullUrl}");
+                _logger.LogInformation($"Request body: {JsonSerializer.Serialize(stkPushRequest)}");
 
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(jsonResponse);
-                var stkPushResponse = JsonSerializer.Deserialize<MpesaStkPushResponse>(jsonResponse);
+                var responseMessage = await _httpClient.PostAsync(fullUrl, content);
+                responseMessage.EnsureSuccessStatusCode();
 
-                return stkPushResponse;
+                string jsonResponse = await responseMessage.Content.ReadAsStringAsync();
+                _logger.LogInformation("Raw JSON Response: {Response}", jsonResponse);
+
+                var deserializedResponse = JsonSerializer.Deserialize<MpesaStkPushResponse>(jsonResponse);
+                if (deserializedResponse == null)
+                {
+                    throw new JsonException("Failed to deserialize M-Pesa STK Push response");
+                }
+
+                _logger.LogInformation("Deserialized Response: {Response}", deserializedResponse);
+                stopwatch.Stop();
+                _logger.LogInformation($"STK Push request completed in {stopwatch.ElapsedMilliseconds}ms");
+                return deserializedResponse;
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound && maxRetries > 0)
+            {
+                await Task.Delay(1000 * (maxRetries + 1)); // Exponential backoff
+                _logger.LogWarning($"STK push request failed due to sandbox environment unavailability. Retrying in {1000 * (maxRetries + 1)}ms...");
+                return await InitiateStkPushAsync(phoneNumber, amount, --maxRetries);
+            }
+            catch (JsonException ex)
+            {
+                _logger.LogError(ex, "Failed to parse STK Push response");
+                throw;
             }
             catch (HttpRequestException ex)
             {
-                var errorMessage = $"STK push request failed with status code {ex.StatusCode}.";
-
-                throw new Exception(errorMessage, ex);
+                _logger.LogError(ex, "STK push request failed with status code {StatusCode}", ex.StatusCode);
+                throw;
             }
         }
 
+        private async Task EnsureValidAccessTokenAsync()
+        {
+            if (string.IsNullOrEmpty(_accessToken) || DateTime.UtcNow >= _accessTokenExpiration)
+            {
+                _logger.LogWarning("Access token invalid or expired. Regenerating token.");
+                _accessToken = await GetAccessTokenAsync();
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+            }
+        }
+
+        private object CreateStkPushRequest(string phoneNumber, decimal amount)
+        {
+            var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmss");
+            var password = Convert.ToBase64String(Encoding.UTF8.GetBytes(
+                $"{_configuration["Mpesa:ShortCode"]}{_configuration["Mpesa:Passkey"]}{timestamp}"));
+
+            return new
+            {
+                BusinessShortCode = _configuration["Mpesa:ShortCode"],
+                Password = password,
+                Timestamp = timestamp,
+                TransactionType = "CustomerPayBillOnline",
+                Amount = amount,
+                PartyA = phoneNumber,
+                PartyB = _configuration["Mpesa:ShortCode"],
+                PhoneNumber = phoneNumber,
+                CallBackURL = $"{_configuration["Application:Domain"]}/api/payments/mpesa/callback",
+                AccountReference = "InsurancePayment",
+                TransactionDesc = "Payment for policy"
+            };
+        }
     }
 }
-

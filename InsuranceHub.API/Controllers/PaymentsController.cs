@@ -5,6 +5,7 @@ using InsuranceHub.Domain.Models;  // Import the correct namespace
 using InsuranceHub.Domain.Enums;
 using Microsoft.Extensions.Logging;
 using InsuranceHub.Application.RepositoryInterfaces;
+using System.Text.Json;
 
 namespace InsuranceHub.API.Controllers
 {
@@ -26,14 +27,27 @@ namespace InsuranceHub.API.Controllers
         [HttpPost("mpesa")]
         public async Task<IActionResult> PayWithMpesa([FromBody] MpesaPaymentRequest request)
         {
-            var result = await _mpesaPaymentService.InitiateStkPushAsync(request.PhoneNumber, request.Amount);
-
-            if (result.ResponseCode == "0")
+            try
             {
-                return Ok(new { message = result.CustomerMessage });
+                _logger.LogInformation("Received M-Pesa payment request for phone number: {PhoneNumber}", request.PhoneNumber);
+
+                var result = await _mpesaPaymentService.InitiateStkPushAsync(request.PhoneNumber, request.Amount);
+
+                _logger.LogInformation("M-Pesa STK Push initiated successfully. Result: {Result}", JsonSerializer.Serialize(result));
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while processing M-Pesa payment request");
+                _logger.LogError("Phone Number: {PhoneNumber}, Amount: {Amount}", request.PhoneNumber, request.Amount);
+
+                // Log the full exception details
+                _logger.LogError(ex, "Full Exception Details");
+
+                return StatusCode(500, "An error occurred while processing your request. Please contact support.");
             }
 
-            return BadRequest(new { message = "Payment failed", details = result.ResponseDescription });
         }
 
         [HttpPost("mpesa/callback")]
