@@ -28,10 +28,8 @@ namespace InsuranceHub.API
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
-            builder.Services.AddHttpClient<MpesaPaymentService>(client =>
-            {
-                client.BaseAddress = new Uri(builder.Configuration["Mpesa:BaseUrl"]);
-            });
+            builder.Services.AddHttpClient<MpesaPaymentService>();
+            builder.Services.AddSingleton<IOAuthTokenService, OAuthTokenService>();
 
 
 

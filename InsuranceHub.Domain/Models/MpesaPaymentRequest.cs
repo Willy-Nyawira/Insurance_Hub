@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsuranceHub.Application.Commands
+namespace InsuranceHub.Domain.Models
 {
     public class MpesaPaymentRequest
     {
         public string PhoneNumber { get; set; }
         public decimal Amount { get; set; }
-      
+        public string AccountReference { get; set; }  // Add this property
+        public string TransactionDesc { get; set; }
     }
 }
